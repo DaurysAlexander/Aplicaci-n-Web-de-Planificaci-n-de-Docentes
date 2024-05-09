@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/jfif" href="{{ url_for('static', filename='img/Logo.jfif') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap CSS -->
+
+    <!--Bibliotecas-->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/planificacion_academica.css') }}">
+
+    <script src="{{ url_for('static', filename='javascript/planificacion_academica.js') }}"></script>
+    <title>Planificacion/Teacher Planner</title>
+</head>
+<body>
+    <div class="menu">
+        <div class="logo"><img src="{{ url_for('static', filename='img/Logo.jfif') }}" width="50px" alt="Logo de tu empresa" class="logo"></div>
+        <a class="active" href="{{ url_for('index') }}">Home</a>
+        <div class="dropdown">
+            <button class="dropbtn">Planificaciones <i class="fa fa-caret-down"></i></button>
+            <div class="dropdown-content">
+                <a href="{{ url_for('planificacion') }}">Planificacion Taller</a>
+                <a href="{{ url_for('planificacion_academica') }}">Planificacion Academica</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">Materiales <i class="fa fa-caret-down"></i></button>
+            <div class="dropdown-content">
+                <a href="{{ url_for('materiales') }}">Materiales</a>
+                <a href="{{ url_for('solicitud_requerimientos')  }}">Solicitud de Requerimientos</a>
+            </div>
+        </div>
+        <a href="{{ url_for('calendar') }}">Calendar</a>
+        {% if current_user.is_authenticated %}
+            <div class="user-info">
+                <a href="{{ url_for('perfil') }}">Perfil</a>
+            </div>
+        {% endif %}
+    </div>
+
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        <center>
+            <h4>Unidad de Aprendizaje Nivel Secundario</h4>
+        </center>
+
+        <table border="1">
+            <tr>
+                <th>Instituto</th>
+                <th>Asignatura</th>
+                <th>Grado</th>
+                <th>Docente</th>
+                <th>Tiempo Asignado</th>
+                <th>Tema</th>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text" value="{{ user_logged_in }}" readonly></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+            </tr>
+        </table>
+
+        <br>
+
+        <table border="2">
+            <tr>
+                <th>Competencias Fundamentales</th>
+                <th>Nivel de Dominio</th>
+                <th>Competencias Específicas</th>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+            </tr>
+        </table>
+
+        <br>
+        
+        <table border="3">
+            <tr>
+                <th>Situación de Aprendizaje</th>
+                <th>Secuencias Didácticas</th>
+                <th>Momento</th>
+                <th>Tiempo</th>
+                <th>Actividades de Aprendizaje</th>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+            </tr>
+        </table>
+
+        <br>
+
+        <table border="4">
+            <tr>
+                <th>Indicadores de Logro</th>
+                <th>Metacognición</th>
+                <th>Evidencias</th>
+                <th>Técnicas e Instrumentos</th>
+                <th>Recursos</th>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+            </tr>
+        </table>
+
+        <br>
+
+        {{ form.submit() }}
+    </form>
+
+    <br>
+    <br>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Instituto</th>
+                <th>Asignatura</th>
+                <th>Grado</th>
+                <th>Docente</th>
+                <th>Tiempo Asignado</th>
+                <th>Tema</th>
+                <th>Competencias Fundamentales</th>
+                <th>Nivel de Dominio</th>
+                <th>Competencias Específicas</th>
+                <th>Situación de Aprendizaje</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for planificacion in planificacion_academica %}
+            <tr>
+                <td>{{ planificacion.1 }}</td>
+                <td>{{ planificacion.2 }}</td>
+                <td>{{ planificacion.3 }}</td>
+                <td>{{ planificacion.4 }}</td>
+                <td>{{ planificacion.5 }}</td>
+                <td>{{ planificacion.6 }}</td>
+                <td>{{ planificacion.7 }}</td>
+                <td>{{ planificacion.8 }}</td>
+                <td>{{ planificacion.9 }}</td>
+                <td>{{ planificacion.10 }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% for planificacion in planificacion_academica %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Secuencias Didácticas</th>
+                <th>Momento</th>
+                <th>Tiempo</th>
+                <th>Actividades de Aprendizaje</th>
+                <th>Indicadores de Logro</th>
+                <th>Metacognición</th>
+                <th>Evidencias</th>
+                <th>Técnicas e Instrumentos</th>
+                <th>Recursos</th>
+                <th>Actiones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ planificacion.11 }}</td>
+                <td>{{ planificacion.12 }}</td>
+                <td>{{ planificacion.13}}</td>
+                <td>{{ planificacion.14 }}</td>
+                <td>{{ planificacion.15 }}</td>
+                <td>{{ planificacion.16 }}</td>
+                <td>{{ planificacion.17 }}</td>
+                <td>{{ planificacion.18 }}</td>
+                <td>{{ planificacion.19 }}</td>
+                <td>
+                    <a href="/edit3_academica/{{ planificacion.0 }}" class="btn btn-sm btn-primary">Editar</a><br><br>
+                    <a href="/delete3_academica/{{ planificacion.0 }}" class="btn btn-sm btn-danger">Eliminar</a><br><br>
+                    <a href="/ver_planificacion_academica/{{ planificacion.0 }}" class="btn btn-sm btn-danger">Ver Planificacion</a>
+                </td>      
+            </tr>
+        </tbody>
+    </table>
+    {% endfor %}
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    var formFields = document.querySelectorAll('td, th, textarea, input,  select');
+    formFields.forEach(function(field) {
+        field.addEventListener('keypress', function(event) {
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                var index = Array.prototype.indexOf.call(formFields, field);
+                var nextField = formFields[index + 1];
+                if (nextField) {
+                    nextField.focus();
+                }
+            }
+        });
+    });
+});
+</script>
+</body>
+</html>

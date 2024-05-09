@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/jfif" href="{{ url_for('static', filename='img/Logo.jfif') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/ver_planificacion_academica.css') }}">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ver Planificación</title>
+</head>
+<body>
+   <center><img src="{{ url_for('static', filename='img/ministerio logo.png') }}" width="100px" alt="Logo de tu empresa" class="logo"> </center>
+   <center><h4>Dirección General de Educación Secundaria</h2></center>
+   <center><h4>Dirección de Educación Técnico Profesional</h3></center>
+    <center>{{ data_academica[1] }}</center>
+    <center><h4>Grado: {{ data_academica[3] }}</h4></center>
+    <center><h4>PLANIFICACION BAJO ENFOQUE POR COMPETENCIAS</h4></center>
+    <center><h5>MATRIZ DE PLANIFICACION POR RESULTADO DE APRENDIZAJE (P), MATERIA DE: {{ data_academica[2] }}</h5></center>
+
+<h5>Bachillerato Academico en {{ data_academica[2] }},        Docente {{ data_academica[4] }},       Modulo Formativo (MF),       Código MF_055_3,        Asociado a la Competencia Fundamental: _X Ética Ciudadana / _X Resolución de Problemas / _X Ambiental 
+    y de la salud / _X Comunicativa / _X Científica y Tecnológica / _X Desarrollo Personal y Espiritual / _X Pensamiento Lógico, Creativo y Crítico.      UC Asociada al MF: MF_055_3,       Código MF_055_3 </h5>
+    
+    <h4>Unidad de Aprendizaje Nivel Secundario</h4>
+    
+    <table border="1">
+        <tr>
+            <th>Centro Educativo: {{ data_academica[1] }}</th>
+            <th>Asignatura: {{ data_academica[2] }}</th>
+            <th>Grado: {{ data_academica[3] }}</th>
+        </tr>
+    </table>
+    <table border="2">
+        <tr>
+            <th>Docente: {{ data_academica[4] }}</th>
+            <th>Tiempo Asignado: {{ data_academica[5] }}         Tema: {{ data_academica[6] }}</th>
+        </tr>
+        </table>
+    <table border="3">
+        <tr>
+            <th>Competencias Fundamentales: {{ data_academica[7] }}</th>
+        </tr>
+    </table>
+    <table border="4">
+        <tr>
+            <th>Nivel de Dominio: <br><br>{{ data_academica[8] }}</th>
+            <th>Competencias Específicas: <br><br>{{ data_academica[9] }}</th>
+        </tr>
+    </table>
+    <table border="5">
+        <tr>
+            <th>Situación de Aprendizaje: {{ data_academica[10] }}</th>
+        </tr>
+    </table>
+    <table border="6">
+        <tr>
+            <th>Secuencias Didácticas: <br><br>{{ data_academica[11] }}</th>
+        </tr>
+    </table>
+    <table border="7">
+        <tr>
+            <th></th>
+            <th>Momento: <br><br>{{ data_academica[12] }}</th>
+            <th>Tiempo: <br><br>{{ data_academica[13] }}</th>
+            <th>Actividades de Aprendizaje: <br><br> {{ data_academica[14] }}</th>
+            <th>Indicadores de Logro: <br><br>{{ data_academica[15] }}</th>
+            <th>Metacognición: <br><br>{{ data_academica[16] }}</th>
+            <th>Evidencias: <br><br>{{ data_academica[17] }}</th>
+            <th>Técnicas e Instrumentos: <br><br>{{ data_academica[18] }}</th>
+            <th>Recursos: <br><br>{{ data_academica[19] }}</th>
+        </tr>
+    </table>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/jfif" href="{{ url_for('static', filename='img/Logo.jfif') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Gestion/Teacher Planner</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/agregar_usuario.css') }}">
+</head>
+<body>
+    <div class="menu">
+        <div class="logo"><img src="{{ url_for('static', filename='img/Logo.jfif') }}" width="50px" alt="Logo de tu empresa" class="logo"></div>
+        <a class="active" href="{{ url_for('index') }}">Home</a>
+        <div class="dropdown">
+            <button class="dropbtn">Agregar <i class="fa fa-caret-down"></i></button>
+            <div class="dropdown-content">
+                <a href="{{ url_for('agregar_usuario') }}">Agregar Administrador</a>
+                <a href="{{ url_for('agregardocentes') }}">Agregar Docentes</a>
+                <a href="{{ url_for('agregargestion') }}">Agregar Gestión</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">Planificaciones <i class="fa fa-caret-down"></i></button>
+            <div class="dropdown-content">
+                <a href="{{ url_for('planificacion_admin') }}">Planificacion Taller</a>
+                <a href="{{ url_for('planificacion_academica_admin') }}">Planificacion Academica</a>
+            </div>
+        </div>
+        <a href="{{ url_for('materiales_admin') }}">Materiales</a>
+        <a href="{{ url_for('calendar_admin') }}">Calendar</a>
+        {% if current_user.is_authenticated %}
+            <div class="user-info">
+                <a href="{{ url_for('perfil') }}">Perfil</a>
+            </div>
+        {% endif %}
+    </div>
+
+
+<div class="container">
+    <h1>CRUD de Administradores</h1>
+    <form action="/add_contact1" method="POST">
+        <input type="text" name="username" placeholder="Username">
+        <input type="text" name="password" placeholder="Password">
+        <input type="number" name="role" placeholder="Role">
+        <button type="submit" class="btn btn-primary">Agregar Administrador</button>
+    </form>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Username</th>
+            <th>Password</th>
+            <th>Role</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for contact in contacts %}
+                {% if contact.3 == 1 %}
+                    <tr>
+                        <td>{{ contact.1 }}</td>
+                        <td>{{ contact.2 }}</td>
+                        <td>{{ contact.3 }}</td>
+                        <td>
+                            <a href="/edit1/{{ contact.0 }}" class="btn btn-sm btn-primary">Editar</a>
+                            <a href="/delete1/{{ contact.0 }}" class="btn btn-sm btn-danger">Eliminar</a>
+                        </td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+            </tbody>
+    </table>
+</div>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+<div class="container">
+    {% for category, message in messages %}
+    <div class="alert alert-{{ category }}" role="alert">
+        {{ message }}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endwith %}
+
+</body>
+</html>

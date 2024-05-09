@@ -1,0 +1,58 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+    background-image: url(https://img.freepik.com/vector-gratis/ilustracion-plana-dia-maestro-espanol_23-2149347437.jpg?size=338&ext=jpg&ga=GA1.1.1488620777.1712966400&semt=ais);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Fija la imagen de fondo */
+}
+
+.container {
+    max-width: 800px; /* Ajusta el tamaño máximo del contenedor */
+    margin: 50px auto;
+    padding: 20px;
+}
+
+.card {
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px; /* Añade un margen alrededor de la tarjeta */
+}
+
+.card-header {
+    background-color: #007bff;
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+    width: 100%;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.mt-3 {
+    margin-top: 20px;
+    text-align: center;
+}
+
+@media (max-width: 576px) {
+    .container {
+        margin-top: 20px;
+    }
+}

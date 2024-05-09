@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" type="image/jfif" href="{{ url_for('static', filename='img/Logo.jfif') }}">
+    <title>Teacher Planner/Docentes/Inicio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--CSS-->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/footer.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bienvenida.css') }}">
+    <!-- Bootstrap CSS -->
+
+    <!--Bibliotecas-->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+>
+    <!--JS-->
+    <script src="{{ url_for('static', filename='javascript/footer.js') }}"></script>
+</head>
+<body>
+
+    <div class="menu">
+        <div class="logo"><img src="{{ url_for('static', filename='img/Logo.jfif') }}" width="50px" alt="Logo de tu empresa" class="logo"></div>
+        <a class="active" href="{{ url_for('index') }}">Home</a>
+        <div class="dropdown">
+            <button class="dropbtn">Planificaciones <i class="fa fa-caret-down"></i></button>
+            <div class="dropdown-content">
+                <a href="{{ url_for('planificacion') }}">Planificacion Taller</a>
+                <a href="{{ url_for('planificacion_academica') }}">Planificacion Academica</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">Materiales <i class="fa fa-caret-down"></i></button>
+            <div class="dropdown-content">
+                <a href="{{ url_for('materiales') }}">Materiales</a>
+                <a href="{{ url_for('solicitud_requerimientos')  }}">Solicitud de Requerimientos</a>
+            </div>
+        </div>
+        <a href="{{ url_for('calendar') }}">Calendar</a>
+        {% if current_user.is_authenticated %}
+            <div class="user-info">
+                <a href="{{ url_for('perfil') }}">Perfil</a>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="container1">
+        <img src="{{ url_for('static', filename='img/Logo.jfif') }}" alt="Logo de tu empresa" class="logo1">
+        <div class="title1"><b>¡Bienvenido {{ user_logged_in }} a la Planificación de Docentes!</b></div>
+        <div class="subtitle1"><b>Organiza tus clases de forma eficiente y sencilla</b></div>
+        <p class="p1"><b>¿Necesitas ayuda?</b></p>
+        <a href="{{ url_for('help') }}" class="button1"><b>¡Comienza ahora mismo!</b></a>
+    </div>
+</body>
+</html>
+

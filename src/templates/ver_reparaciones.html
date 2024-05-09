@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/jfif" href="{{ url_for('static', filename='img/Logo.jfif') }}">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ver Materiales Enviados</title>
+</head>
+<body> 
+    <center><img src="{{ url_for('static', filename='img/ministerio logo.png') }}" width="100px" alt="Logo de tu empresa" class="logo"> </center>
+    <center><h4>100% PRESENCIA DE DIOS</h2></center>
+    <center><h4>FORMULARIO DE REQUERIMIENTOS</h3></center>
+     <center> <table border="1"><h4><th>REQUERIMIENTO DE:</th> <td><B>REPARACIONES INTERNAS</B></td></h4></table></center>
+ 
+<br>
+    <center><table border="1">
+        <tr>
+            <th>Área Taller</th>
+            <th>Cantidad</th>
+            <th>Descripción</th>
+            <th>Observación</th>
+            <th>Fecha</th>
+            <th>Nombre</th>
+            <th>Solicitado por</th>
+        </tr>
+        {% for reparacione in reparaciones %}
+        <tr>
+            <td>{{ reparacione.1 }}</td>
+            <td>{{ reparacione.2 }}</td>
+            <td>{{ reparacione.3 }}</td>
+            <td>{{ reparacione.4 }}</td>
+            <td>{{ reparacione.5 }}</td>
+            <td>{{ reparacione.6 }}</td>
+            <td>{{ reparacione.7 }}</td>
+        </tr>
+        {% endfor %}
+    </table></center>
+    <br>
+    <a href="/descargar_reparaciones">Descargar en PDF</a>
+    <br>
+    <form action="/enviar_Email8" method="GET">
+        <button type="submit">Enviar Email</button>
+    </form>
+    <br>
+    <div class="back-button">
+        <a href="#" onclick="history.back()">Regresar</a>
+    </div>
+
+</body>
+</html>

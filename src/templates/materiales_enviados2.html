@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/jfif" href="{{ url_for('static', filename='img/Logo.jfif') }}">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ver Materiales Enviados</title>
+</head>
+<body>
+    <center><img src="{{ url_for('static', filename='img/ministerio logo.png') }}" width="100px" alt="Logo de tu empresa" class="logo"> </center>
+    <center><h4>Dirección General de Educación Secundaria</h2></center>
+    <center><h4>Dirección de Educación Técnico Profesional</h3></center>
+     <center><h4>PLANIFICACION BAJO ENFOQUE POR COMPETENCIAS</h4></center>
+ 
+ <h5>Modulo Formativo (MF),       Código MF_055_3,        Asociado a la Competencia Fundamental: _X Ética Ciudadana / _X Resolución de Problemas / _X Ambiental 
+     y de la salud / _X Comunicativa / _X Científica y Tecnológica / _X Desarrollo Personal y Espiritual / _X Pensamiento Lógico, Creativo y Crítico.      UC Asociada al MF: MF_055_3,       Código MF_055_3 </h5>
+    <br>
+    <center><h2>Requerimiento O Recursos: Materiales, Herramientas, Equipos, Mobiliarios y Espacio</h2></center> 
+    <h3>Materiales a usar:</h3>
+    <table border="1">
+        <tr>
+            <th>Area o Taller</th>
+            <th>Docente</th>
+            <th>Cantidad</th>
+            <th>Descripción</th>
+            <th>En existencia</th>
+            <th>Comprar</th>
+        </tr>
+        {% for material in materiales %}
+        <tr>
+            <td>{{ material[1] }}</td>
+            <td>{{ material[2] }}</td>
+            <td>{{ material[3] }}</td>
+            <td>{{ material[4] }}</td>
+            <td>{{ material[5] }}</td>
+            <td>{{ material[6] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

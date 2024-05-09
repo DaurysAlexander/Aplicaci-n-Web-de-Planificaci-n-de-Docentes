@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" type="image/jfif" href="{{ url_for('static', filename='img/Logo.jfif') }}">
+    <title>Calendario/Teacher Planner</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/calendar_admin.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.0/main.min.css" rel="stylesheet">
+    <!-- JS -->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.0/main.min.js"></script>
+    <script src="{{ url_for('static', filename='javascript/calendar.js') }}"></script>
+</head>
+<body>
+    <div class="menu">
+        <div class="logo"><img src="{{ url_for('static', filename='img/Logo.jfif') }}" width="50px" alt="Logo de tu empresa" class="logo"></div>
+        <a class="active" href="{{ url_for('index') }}">Home</a>
+        <div class="dropdown">
+            <button class="dropbtn">Agregar <i class="fa fa-caret-down"></i></button>
+            <div class="dropdown-content">
+                <a href="{{ url_for('agregar_usuario') }}">Agregar Administrador</a>
+                <a href="{{ url_for('agregardocentes') }}">Agregar Docentes</a>
+                <a href="{{ url_for('agregargestion') }}">Agregar Gestión</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">Planificaciones <i class="fa fa-caret-down"></i></button>
+            <div class="dropdown-content">
+                <a href="{{ url_for('planificacion_admin') }}">Planificacion Taller</a>
+                <a href="{{ url_for('planificacion_academica_admin') }}">Planificacion Academica</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">Materiales <i class="fa fa-caret-down"></i></button>
+            <div class="dropdown-content">
+                <a href="{{ url_for('materiales_admin') }}">Materiales</a>
+                <a href="">Solicitud de Requerimientos</a>
+            </div>
+        </div>
+        <a href="{{ url_for('calendar_admin') }}">Calendar</a>
+        {% if current_user.is_authenticated %}
+            <div class="user-info">
+                <a href="{{ url_for('perfil') }}">Perfil</a>
+            </div>
+        {% endif %}
+    </div>
+
+    <h1>Calendario Académico</h1>
+
+    <div class="event-form">
+        <input type="text" id="eventTitle" placeholder="Título del Evento">
+        <input type="date" id="eventStart">
+        <input type="date" id="eventEnd">
+        <button onclick="addEvent()">Agregar Evento</button>
+    </div>
+
+    <div id="calendar"></div>
+
+</body>
+</html>
+

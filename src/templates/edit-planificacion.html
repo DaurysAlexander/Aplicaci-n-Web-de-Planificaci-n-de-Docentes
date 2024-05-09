@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/jfif" href="{{ url_for('static', filename='img/Logo.jfif') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Material/Teacher Planner</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/edit_planificacion.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>CRUD de planificacion</h1>
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <div>
+                {{ form.institucion.label }}
+                {{ form.institucion }}
+            </div>
+            <div>
+                {{ form.area_taller.label }}
+                {{ form.area_taller }}
+            </div>
+            <div>
+                {{ form.ra.label }}
+                {{ form.ra }}
+            </div>
+            <div>
+                {{ form.elementos_capacidad.label }}
+                {{ form.elementos_capacidad }}
+            </div>
+            <div>
+                {{ form.nivel.label }}
+                {{ form.nivel }}
+            </div>
+            <div>
+                {{ form.fecha.label }}
+                {{ form.fecha }}
+            </div>
+            <div>
+                {{ form.estrategias.label }}
+                {{ form.estrategias }}
+            </div>
+            <div>
+                {{ form.actividades_evaluacion.label }}
+                {{ form.actividades_evaluacion }}
+            </div>
+            <div>
+                {{ form.contenidos_trabajados.label }}
+                {{ form.contenidos_trabajados }}
+            </div>
+            <div>
+                {{ form.docente.label }}
+                {{ form.docente }}
+            </div>
+            <div>
+                {{ form.codigo.label }}
+                {{ form.codigo }}
+            </div>
+            <div>
+                {{ form.UC.label }}
+                {{ form.UC }}
+            </div>
+            <div>
+                {{ form.fecha_inicio.label }}
+                {{ form.fecha_inicio }}
+            </div>
+            <div>
+                {{ form.fecha_termino.label }}
+                {{ form.fecha_termino }}
+            </div>
+            <button type="submit">Guardar Cambios</button>
+            <div class="back-button">
+                <a href="#" onclick="history.back()">Cancelar</a>
+            </div>
+        </form>
+    </div>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="container">
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}" role="alert">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+
+</body>
+</html>
+

@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/ver_planificacion_academica.css') }}">
+    <link rel="icon" type="image/jfif" href="{{ url_for('static', filename='img/Logo.jfif') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/materiale.css') }}">
+    <!-- Bootstrap CSS -->
+
+    <!--Bibliotecas-->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+
+    <script src="{{ url_for('static', filename='javascript/materiales.js') }}"></script>
+    <title>Materiales/Teacher Planner</title>
+</head>
+<body>
+    <div class="menu">
+        <div class="logo"><img src="{{ url_for('static', filename='img/Logo.jfif') }}" width="50px" alt="Logo de tu empresa" class="logo"></div>
+        <a class="active" href="{{ url_for('index') }}">Home</a>
+        <div class="dropdown">
+            <button class="dropbtn">Planificaciones <i class="fa fa-caret-down"></i></button>
+            <div class="dropdown-content">
+                <a href="{{ url_for('planificacion') }}">Planificacion Taller</a>
+                <a href="{{ url_for('planificacion_academica') }}">Planificacion Academica</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">Materiales <i class="fa fa-caret-down"></i></button>
+            <div class="dropdown-content">
+                <a href="{{ url_for('materiales') }}">Materiales</a>
+                <a href="{{ url_for('solicitud_requerimientos')  }}">Solicitud de Requerimientos</a>
+            </div>
+        </div>
+        <a href="{{ url_for('calendar') }}">Calendar</a>
+        {% if current_user.is_authenticated %}
+            <div class="user-info">
+                <a href="{{ url_for('perfil') }}">Perfil</a>
+            </div>
+        {% endif %}
+    </div>
+
+    <h3>Seleccione el tipo de requerimiento:</h3>
+    <button onclick="mostrarFormulario('equiposForm')">Equipos/Maquinaria</button>
+    <button onclick="mostrarFormulario('practicasForm')">Materiales Practicas Pedagogicas</button>
+    <button onclick="mostrarFormulario('oficinaForm')">Materiales De Oficina</button>
+    <button onclick="mostrarFormulario('muralesForm')">Materiales Para Murales Y/O Actividades Fija del Centro</button>
+    <button onclick="mostrarFormulario('limpiezaForm')">Materiales De Limpieza</button>
+    <button onclick="mostrarFormulario('reparacionesForm')">Reparaciones Internas</button>
+    <!-- Agrega más botones según sea necesario -->
+
+<form id="equiposForm" style="display: none;" method="POST" action="{{ url_for('solicitud_requerimientos') }}">
+    <input type="hidden" name="tipo_requerimiento" value="equipos">
+        <center><h3>Formulario De Requerimientos</h3></center>
+        <h4>Equipos/Maquinarias Y/O Herramientas</h4>
+        <p>AREA O TALLER: <input type="text" name="area_taller" placeholder="" required></p>
+        <p>Docente: <input type="text" name="nombre" value="{{ user_logged_in }}" readonly></p>
+        <p>Solicitado_por: <input type="text" name="solicitado_por" placeholder=""></p>
+        <p>Materiales a usar:</p>
+        <table id="tabla-materiales-equipos" border="1">
+            <tr>
+                <th>Cantidad.</th>
+                <th>Descripción</th>    
+                <th>Observacion</th>
+                <th>Fecha</th>
+                <th>Acción</th>
+            </tr>
+            <tr>
+                <td><input type="number" name="Cantidad" placeholder=""></td>
+                <td><input type="text" name="Descripcion" placeholder=""></td>
+                <td><input type="text" name="Observacion" placeholder=""></td>
+                <td><input type="date" name="Fecha" placeholder=""></td>
+                <td><button type="button" class="eliminar-material">Eliminar</button></td>
+            </tr>
+        </table>
+        <button type="button" id="agregar-material-equipos">Agregar Material</button>
+        <button type="button" onclick="document.getElementById('equiposForm').submit()">Enviar Equipos/Maquinaria</button>
+
+        <h4>Equipos/Maquinarias</h4>
+        <table>
+            <thead>
+                <tr>
+                    <th>Área Taller</th>
+                    <th>Cantidad</th>
+                    <th>Descripción</th>
+                    <th>Observación</th>
+                    <th>Fecha</th>
+                    <th>Nombre</th>
+                    <th>Solicitado por</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for equipo in equipos %}
+                <tr>
+                    <td>{{ equipo.1 }}</td>
+                    <td>{{ equipo.2 }}</td>
+                    <td>{{ equipo.3 }}</td>
+                    <td>{{ equipo.4 }}</td>
+                    <td>{{ equipo.5 }}</td>
+                    <td>{{ equipo.6 }}</td>
+                    <td>{{ equipo.7 }}</td>
+                    <td>
+                        <a href="{{ url_for('ver_equipos', id=equipo.0) }}">Ver Detalles</a>
+                        <a href="{{ url_for('editar_material', id=equipo.0) }}">Editar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+    
+    </form>
+
+    <form id="practicasForm" style="display: none;" method="POST" action="{{ url_for('solicitud_requerimientos') }}">
+        <input type="hidden" name="tipo_requerimiento" value="practicas">
+        <center><h3>Formulario De Requerimientos</h3></center>
+        <h4>Materiales Practicas Pedagogicas</h4>
+        <p>AREA O TALLER: <input type="text" name="area_taller" placeholder="" required></p>
+        <p>Docente: <input type="text" name="nombre" value="{{ user_logged_in }}" readonly></p>
+        <p>Solicitado_por: <input type="text" name="solicitado_por" placeholder=""></p>
+        <p>Materiales a usar:</p>
+        <table id="tabla-materiales-practicas" border="1">
+            <tr>
+                <th>Cantidad.</th>
+                <th>Descripción</th>    
+                <th>Observacion</th>
+                <th>Fecha</th>
+                <th>Acción</th>
+            </tr>
+            <tr>
+                <td><input type="number" name="Cantidad" placeholder=""></td>
+                <td><input type="text" name="Descripcion" placeholder=""></td>
+                <td><input type="text" name="Observacion" placeholder=""></td>
+                <td><input type="date" name="Fecha" placeholder=""></td>
+                <td><button type="button" class="eliminar-material">Eliminar</button></td>
+            </tr>
+        </table>
+        <button type="button" id="agregar-material-practicas">Agregar Material</button>
+        <button type="button" onclick="document.getElementById('practicasForm').submit()">Enviar Materiales para Prácticas Pedagógicas</button>
+
+        <h4>Materiales Practicas Pedagogicas</h4>
+        <table>
+            <thead>
+                <tr>
+                    <th>Área Taller</th>
+                    <th>Cantidad</th>
+                    <th>Descripción</th>
+                    <th>Observación</th>
+                    <th>Fecha</th>
+                    <th>Nombre</th>
+                    <th>Solicitado por</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for practica in practicas %}
+                <tr>
+                    <td>{{ practica.1 }}</td>
+                    <td>{{ practica.2 }}</td>
+                    <td>{{ practica.3 }}</td>
+                    <td>{{ practica.4 }}</td>
+                    <td>{{ practica.5 }}</td>
+                    <td>{{ practica.6 }}</td>
+                    <td>{{ practica.7 }}</td>
+                    <td>
+                        <a href="{{ url_for('ver_practicas', id=practica[0]) }}">Ver Detalles</a>
+                        <a href="{{ url_for('editar_material', id=practica[0]) }}">Editar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+    
+    </form>
+
+    <form id="oficinaForm" style="display: none;" method="POST" action="{{ url_for('solicitud_requerimientos') }}">
+        <input type="hidden" name="tipo_requerimiento" value="oficina">
+        <center><h3>Formulario De Requerimientos</h3></center>
+        <h4>Materiales De Oficina</h4>
+        <p>AREA O TALLER: <input type="text" name="area_taller" placeholder="" required></p>
+        <p>Docente: <input type="text" name="nombre" value="{{ user_logged_in }}" readonly></p>
+        <p>Solicitado_por: <input type="text" name="solicitado_por" placeholder=""></p>
+        <p>Materiales a usar:</p>
+        <table id="tabla-materiales-oficina" border="1">
+            <tr>
+                <th>Cantidad.</th>
+                <th>Descripción</th>    
+                <th>Observacion</th>
+                <th>Fecha</th>
+                <th>Acción</th>
+            </tr>
+            <tr>
+                <td><input type="number" name="Cantidad" placeholder=""></td>
+                <td><input type="text" name="Descripcion" placeholder=""></td>
+                <td><input type="text" name="Observacion" placeholder=""></td>
+                <td><input type="date" name="Fecha" placeholder=""></td>
+                <td><button type="button" class="eliminar-material">Eliminar</button></td>
+            </tr>
+        </table>
+        <button type="button" id="agregar-material-Oficina">Agregar Material</button>
+        <button type="submit">Enviar</button>
+
+        <table>
+        <thead>
+            <tr>
+                <th>Área Taller</th>
+                <th>Cantidad</th>
+                <th>Descripción</th>
+                <th>Observación</th>
+                <th>Fecha</th>
+                <th>Nombre</th>
+                <th>Solicitado por</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for oficina in oficinas %}
+                <tr>
+                    <td>{{ oficina.1 }}</td>
+                    <td>{{ oficina.2 }}</td>
+                    <td>{{ oficina.3 }}</td>
+                    <td>{{ oficina.4 }}</td>
+                    <td>{{ oficina.5 }}</td>
+                    <td>{{ oficina.6 }}</td>
+                    <td>{{ oficina.7 }}</td>
+                    <td>
+                        <a href="{{ url_for('ver_oficinas', id=oficina[0]) }}">Ver Detalles</a>
+                        <a href="{{ url_for('editar_material', id=oficina[0]) }}">Editar</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+    
+    </form>
+
+    <form id="muralesForm" style="display: none;" method="POST" action="{{ url_for('solicitud_requerimientos') }}">
+        <input type="hidden" name="tipo_requerimiento" value="murales">
+        <center><h3>Formulario De Requerimientos</h3></center>
+        <h4>Materiales Para Murales Y/O Actividades Fija del Centro</h4>
+        <p>AREA O TALLER: <input type="text" name="area_taller" placeholder="" required></p>
+        <p>Docente: <input type="text" name="nombre" value="{{ user_logged_in }}" readonly></p>
+        <p>Solicitado_por: <input type="text" name="solicitado_por" placeholder=""></p>
+        <p>Materiales a usar:</p>
+        <table id="tabla-materiales-murales" border="1">
+            <tr>
+                <th>Cantidad.</th>
+                <th>Descripción</th>    
+                <th>Observacion</th>
+                <th>Fecha</th>
+                <th>Acción</th>
+            </tr>
+            <tr>
+                <td><input type="number" name="Cantidad" placeholder=""></td>
+                <td><input type="text" name="Descripcion" placeholder=""></td>
+                <td><input type="text" name="Observacion" placeholder=""></td>
+                <td><input type="date" name="Fecha" placeholder=""></td>
+                <td><button type="button" class="eliminar-material">Eliminar</button></td>
+            </tr>
+        </table>
+        <button type="button" id="agregar-material-murales">Agregar Material</button>
+        <button type="submit">Enviar</button>
+
+        <table>
+        <thead>
+            <tr>
+                <th>Área Taller</th>
+                <th>Cantidad</th>
+                <th>Descripción</th>
+                <th>Observación</th>
+                <th>Fecha</th>
+                <th>Nombre</th>
+                <th>Solicitado por</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for murale in murales %}
+                <tr>
+                    <td>{{ murale.1 }}</td>
+                    <td>{{ murale.2 }}</td>
+                    <td>{{ murale.3 }}</td>
+                    <td>{{ murale.4 }}</td>
+                    <td>{{ murale.5 }}</td>
+                    <td>{{ murale.6 }}</td>
+                    <td>{{ murale.7 }}</td>
+                    <td>
+                        <a href="{{ url_for('ver_murales', id=murale[0]) }}">Ver Detalles</a>
+                        <a href="{{ url_for('editar_material', id=murale[0]) }}">Editar</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+    
+    </form>
+
+    <form id="limpiezaForm" style="display: none;" method="POST" action="{{ url_for('solicitud_requerimientos') }}">
+        <input type="hidden" name="tipo_requerimiento" value="limpieza">
+        <center><h3>Formulario De Requerimientos</h3></center>
+        <h4>Materiales De Limpieza</h4>
+        <p>AREA O TALLER: <input type="text" name="area_taller" placeholder="" required></p>
+        <p>Docente: <input type="text" name="nombre" value="{{ user_logged_in }}" readonly></p>
+        <p>Solicitado_por: <input type="text" name="solicitado_por" placeholder=""></p>
+        <p>Materiales a usar:</p>
+        <table id="tabla-materiales-limpieza" border="1">
+            <tr>
+                <th>Cantidad.</th>
+                <th>Descripción</th>    
+                <th>Observacion</th>
+                <th>Fecha</th>
+                <th>Acción</th>
+            </tr>
+            <tr>
+                <td><input type="number" name="Cantidad" placeholder=""></td>
+                <td><input type="text" name="Descripcion" placeholder=""></td>
+                <td><input type="text" name="Observacion" placeholder=""></td>
+                <td><input type="date" name="Fecha" placeholder=""></td>
+                <td><button type="button" class="eliminar-material">Eliminar</button></td>
+            </tr>
+        </table>
+        <button type="button" id="agregar-material-limpieza">Agregar Material</button>
+        <button type="submit">Enviar</button>
+
+        <table>
+        <thead>
+            <tr>
+                <th>Área Taller</th>
+                <th>Cantidad</th>
+                <th>Descripción</th>
+                <th>Observación</th>
+                <th>Fecha</th>
+                <th>Nombre</th>
+                <th>Solicitado por</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for limpieza in limpiezas %}
+                <tr>
+                    <td>{{ limpieza.1 }}</td>
+                    <td>{{ limpieza.2 }}</td>
+                    <td>{{ limpieza.3 }}</td>
+                    <td>{{ limpieza.4 }}</td>
+                    <td>{{ limpieza.5 }}</td>
+                    <td>{{ limpieza.6 }}</td>
+                    <td>{{ limpieza.7 }}</td>
+                    <td>
+                        <a href="{{ url_for('ver_limpiezas', id=limpieza[0]) }}">Ver Detalles</a>
+                        <a href="{{ url_for('editar_material', id=limpieza[0]) }}">Editar</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+    
+    </form>
+
+    <form id="reparacionesForm" style="display: none;" method="POST" action="{{ url_for('solicitud_requerimientos') }}">
+        <input type="hidden" name="tipo_requerimiento" value="reparaciones">
+        <center><h3>Formulario De Requerimientos</h3></center>
+        <h4>Reparaciones Internas</h4>
+        <p>AREA O TALLER: <input type="text" name="area_taller" placeholder="" required></p>
+        <p>Docente: <input type="text" name="nombre" value="{{ user_logged_in }}" readonly></p>
+        <p>Solicitado_por: <input type="text" name="solicitado_por" placeholder=""></p>
+        <p>Materiales a usar:</p>
+        <table id="tabla-materiales-reparaciones" border="1">
+            <tr>
+                <th>Cantidad.</th>
+                <th>Descripción</th>    
+                <th>Observacion</th>
+                <th>Fecha</th>
+                <th>Acción</th>
+            </tr>
+            <tr>
+                <td><input type="number" name="Cantidad" placeholder=""></td>
+                <td><input type="text" name="Descripcion" placeholder=""></td>
+                <td><input type="text" name="Observacion" placeholder=""></td>
+                <td><input type="date" name="Fecha" placeholder=""></td>
+                <td><button type="button" class="eliminar-material">Eliminar</button></td>
+            </tr>
+        </table>
+        <button type="button" id="agregar-material-reparaciones">Agregar Material</button>
+        <button type="submit">Enviar</button>
+
+        <table>
+        <thead>
+            <tr>
+                <th>Área Taller</th>
+                <th>Cantidad</th>
+                <th>Descripción</th>
+                <th>Observación</th>
+                <th>Fecha</th>
+                <th>Nombre</th>
+                <th>Solicitado por</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for reparacione in reparaciones %}
+                <tr>
+                    <td>{{ reparacione.1 }}</td>
+                    <td>{{ reparacione.2 }}</td>
+                    <td>{{ reparacione.3 }}</td>
+                    <td>{{ reparacione.4 }}</td>
+                    <td>{{ reparacione.5 }}</td>
+                    <td>{{ reparacione.6 }}</td>
+                    <td>{{ reparacione.7 }}</td>
+                    <td>
+                        <a href="{{ url_for('ver_reparaciones', id=reparacione[0]) }}">Ver Detalles</a>
+                        <a href="{{ url_for('editar_material', id=reparacione[0]) }}">Editar</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+    
+    </form>
+
+    <script>
+// Función para mostrar el formulario correspondiente al tipo de requerimiento seleccionado
+function mostrarFormulario(idFormulario) {
+    // Ocultar todos los formularios
+    document.getElementById('equiposForm').style.display = 'none';
+    document.getElementById('practicasForm').style.display = 'none';
+    document.getElementById('oficinaForm').style.display = 'none';
+    document.getElementById('muralesForm').style.display = 'none';
+    document.getElementById('limpiezaForm').style.display = 'none';
+    document.getElementById('reparacionesForm').style.display = 'none';
+
+    // Mostrar el formulario correspondiente al tipo de requerimiento seleccionado
+    document.getElementById(idFormulario).style.display = 'block';
+}
+
+// Función para agregar una nueva fila de materiales al formulario
+function agregarMaterial(tipoFormulario) {
+    // Obtener la tabla correspondiente al tipo de formulario
+    let tabla = document.getElementById('tabla-materiales-' + tipoFormulario);
+    
+    // Crear una nueva fila
+    let newRow = tabla.insertRow(-1);
+    
+    // Insertar celdas en la nueva fila
+    newRow.innerHTML = `
+        <td><input type="number" name="Cantidad" placeholder=""></td>
+        <td><input type="text" name="Descripcion" placeholder=""></td>
+        <td><input type="text" name="Observacion" placeholder=""></td>
+        <td><input type="date" name="Fecha" placeholder=""></td>
+        <td><button type="button" class="eliminar-material" onclick="eliminarFila(this)">Eliminar</button></td>
+    `;
+}
+
+// Función para eliminar una fila de materiales del formulario
+function eliminarFila(botonEliminar) {
+    // Obtener la fila a eliminar
+    let fila = botonEliminar.parentNode.parentNode;
+    
+    // Obtener la tabla a la que pertenece la fila
+    let tabla = fila.parentNode;
+    
+    // Eliminar la fila de la tabla
+    tabla.removeChild(fila);
+}
+
+// Asociar eventos a los botones de agregar material
+document.getElementById('agregar-material-equipos').addEventListener('click', function() {
+    agregarMaterial('equipos');
+});
+document.getElementById('agregar-material-practicas').addEventListener('click', function() {
+    agregarMaterial('practicas');
+});
+document.getElementById('agregar-material-Oficina').addEventListener('click', function() {
+    agregarMaterial('oficina');
+});
+document.getElementById('agregar-material-murales').addEventListener('click', function() {
+    agregarMaterial('murales');
+});
+document.getElementById('agregar-material-limpieza').addEventListener('click', function() {
+    agregarMaterial('limpieza');
+});
+document.getElementById('agregar-material-reparaciones').addEventListener('click', function() {
+    agregarMaterial('reparaciones');
+});
+
+</script>
+
+
+
+</body>
+</html>

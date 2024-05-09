@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/jfif" href="{{ url_for('static', filename='img/Logo.jfif') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Material/Teacher Planner</title>
+</head>
+<body>
+    <h1>Editar Material</h1>
+    <form method="POST">
+        <input type="hidden" name="id" value="{{ material[0] }}">
+        <p>AREA O TALLER: <input type="text" name="area_taller" value="{{ material[1] }}"></p>
+        <p>Docente: <input type="text" name="docente" value="{{ material[2] }}"></p>
+        <p>Cantidad: <input type="number" name="materiales_cantidad" value="{{ material[3] }}"></p>
+        <p>Descripción: <input type="text" name="materiales_descripcion" value="{{ material[4] }}"></p>
+        <p>En existencia: <input type="number" name="materiales_existencia" value="{{ material[5] }}"></p>
+        <p>Comprar: <input type="text" name="materiales_comprar" value="{{ material[6] }}"></p>
+        <button type="submit">Guardar Cambios</button>
+        <div class="back-button">
+            <a href="#" onclick="history.back()">Cancelar</a>
+        </div>
+    </form>
+    
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="container">
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}" role="alert">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/jfif" href="{{ url_for('static', filename='img/Logo.jfif') }}">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ver Materiales Enviados</title>
+</head>
+<body> 
+    <center><img src="{{ url_for('static', filename='img/ministerio logo.png') }}" width="100px" alt="Logo de tu empresa" class="logo"> </center>
+    <center><h4>Dirección General de Educación Secundaria</h2></center>
+    <center><h4>Dirección de Educación Técnico Profesional</h3></center>
+     <center><h4>PLANIFICACION BAJO ENFOQUE POR COMPETENCIAS</h4></center>
+ 
+ <h5>Modulo Formativo (MF),       Código MF_055_3,        Asociado a la Competencia Fundamental: _X Ética Ciudadana / _X Resolución de Problemas / _X Ambiental 
+     y de la salud / _X Comunicativa / _X Científica y Tecnológica / _X Desarrollo Personal y Espiritual / _X Pensamiento Lógico, Creativo y Crítico.      UC Asociada al MF: MF_055_3,       Código MF_055_3 </h5>
+    <br>
+    <center><h2>Requerimiento O Recursos: Materiales, Herramientas, Equipos, Mobiliarios y Espacio</h2></center> 
+    <h3>Materiales a usar:</h3>
+    <table border="1">
+        <tr>
+            <th>Área Taller</th>
+            <th>Cantidad</th>
+            <th>Descripción</th>
+            <th>Observación</th>
+            <th>Fecha</th>
+            <th>Nombre</th>
+            <th>Solicitado por</th>
+        </tr>
+        {% for equipo in equipos %}
+        <tr>
+            <td>{{ equipo.1 }}</td>
+            <td>{{ equipo.2 }}</td>
+            <td>{{ equipo.3 }}</td>
+            <td>{{ equipo.4 }}</td>
+            <td>{{ equipo.5 }}</td>
+            <td>{{ equipo.6 }}</td>
+            <td>{{ equipo.7 }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <a href="/descargar_solicitud">Descargar en PDF</a>
+    <br>
+    <form action="/enviar_Email2" method="GET">
+        <button type="submit">Enviar Email</button>
+    </form>
+    <br>
+    <div class="back-button">
+        <a href="#" onclick="history.back()">Regresar</a>
+    </div>
+
+</body>
+</html>

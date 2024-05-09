@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/jfif" href="{{ url_for('static', filename='img/Logo.jfif') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materiales Gestion/Teacher Planner</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/materiales_gestion.css') }}">
+
+</head>
+<body>
+<div class="menu-container">
+    <div class="menu">
+        <div class="logo"><img src="{{ url_for('static', filename='img/Logo.jfif') }}" width="50px" alt="Logo de tu empresa" class="logo"></div>
+        <a class="active" href="{{ url_for('index') }}">Home</a>
+        <div class="dropdown">
+            <button class="dropbtn">Materiales <i class="fa fa-caret-down"></i></button>
+            <div class="dropdown-content">
+                <a href="{{ url_for('materiales_gestion') }}">Materiales</a>
+                <a href="">Solicitud de Requerimientos</a>
+            </div>
+        </div>
+    </div>
+    {% if current_user.is_authenticated %}
+        <div class="user-info">
+            <a href="{{ url_for('perfil') }}">Perfil</a>
+        </div>
+    {% endif %}
+</div>
+<br><br>
+<table id="materiales-enviados" border="1">
+    <tr>
+        <th colspan="7">Materiales Enviados por Docentes</th>
+    </tr>
+    <tr>
+        <th>Area o Taller</th>
+        <th>Docente</th>
+        <th>Cantidad</th>
+        <th>Descripción</th>
+        <th>Existencia</th>
+        <th>Comprar</th>
+        <th>Acciones</th>
+    </tr>
+    {% for material in materiales %}
+    <tr>
+        <td>{{ material[1] }}</td>
+        <td>{{ material[2] }}</td>
+        <td>{{ material[3] }}</td>
+        <td>{{ material[4] }}</td>
+        <td>{{ material[5] }}</td>
+        <td>{{ material[6] }}</td>
+        <td>
+            <a href="{{ url_for('ver_materiales_enviados', id=material[0]) }}">Ver Detalles</a>
+            <br>
+            <form action="{{ url_for('eliminar_material_gestion', id=material[0]) }}" method="POST">
+                <button type="submit">Eliminar</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+</body>
+</html>

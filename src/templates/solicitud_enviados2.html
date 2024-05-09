@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/jfif" href="{{ url_for('static', filename='img/Logo.jfif') }}">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ver Materiales Enviados</title>
+</head>
+<body> 
+    <center><img src="{{ url_for('static', filename='img/ministerio logo.png') }}" width="100px" alt="Logo de tu empresa" class="logo"> </center>
+    <center><h4>Dirección General de Educación Secundaria</h2></center>
+    <center><h4>Dirección de Educación Técnico Profesional</h3></center>
+     <center><h4>PLANIFICACION BAJO ENFOQUE POR COMPETENCIAS</h4></center>
+ 
+ <h5>Modulo Formativo (MF),       Código MF_055_3,        Asociado a la Competencia Fundamental: _X Ética Ciudadana / _X Resolución de Problemas / _X Ambiental 
+     y de la salud / _X Comunicativa / _X Científica y Tecnológica / _X Desarrollo Personal y Espiritual / _X Pensamiento Lógico, Creativo y Crítico.      UC Asociada al MF: MF_055_3,       Código MF_055_3 </h5>
+    <br>
+    <center><h2>Requerimiento O Recursos: Materiales, Herramientas, Equipos, Mobiliarios y Espacio</h2></center> 
+    <h3>Materiales a usar:</h3>
+    {% if equipos %}
+    <table border="1">
+        <tr>
+            <th>Área Taller</th>
+            <th>Cantidad</th>
+            <th>Descripción</th>
+            <th>Observación</th>
+            <th>Fecha</th>
+            <th>Nombre</th>
+            <th>Solicitado por</th>
+        </tr>
+        {% for equipo in equipos %}
+        <tr>
+            <td>{{ equipo.1 }}</td>
+            <td>{{ equipo.2 }}</td>
+            <td>{{ equipo.3 }}</td>
+            <td>{{ equipo.4 }}</td>
+            <td>{{ equipo.5 }}</td>
+            <td>{{ equipo.6 }}</td>
+            <td>{{ equipo.7 }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    {% endif %}
+    {% if practica %}
+    <table border="1">
+        <tr>
+            <th>Área Taller</th>
+            <th>Cantidad</th>
+            <th>Descripción</th>
+            <th>Observación</th>
+            <th>Fecha</th>
+            <th>Nombre</th>
+            <th>Solicitado por</th>
+        </tr>
+        {% for practica in practicas %}
+        <tr>
+            <td>{{ practica.1 }}</td>
+            <td>{{ practica.2 }}</td>
+            <td>{{ practica.3 }}</td>
+            <td>{{ practica.4 }}</td>
+            <td>{{ practica.5 }}</td>
+            <td>{{ practica.6 }}</td>
+            <td>{{ practica.7 }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    {% endif %}
+    {% if oficina %}
+    <table border="1">
+        <tr>
+            <th>Área Taller</th>
+            <th>Cantidad</th>
+            <th>Descripción</th>
+            <th>Observación</th>
+            <th>Fecha</th>
+            <th>Nombre</th>
+            <th>Solicitado por</th>
+        </tr>
+        {% for oficina in oficinas %}
+        <tr>
+            <td>{{ oficina.1 }}</td>
+            <td>{{ oficina.2 }}</td>
+            <td>{{ oficina.3 }}</td>
+            <td>{{ oficina.4 }}</td>
+            <td>{{ oficina.5 }}</td>
+            <td>{{ oficina.6 }}</td>
+            <td>{{ oficina.7 }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    {% endif %}
+    {% if murale %}
+    <table border="1">
+        <tr>
+            <th>Área Taller</th>
+            <th>Cantidad</th>
+            <th>Descripción</th>
+            <th>Observación</th>
+            <th>Fecha</th>
+            <th>Nombre</th>
+            <th>Solicitado por</th>
+        </tr>
+        {% for murale in murales %}
+        <tr>
+            <td>{{ murale.1 }}</td>
+            <td>{{ murale.2 }}</td>
+            <td>{{ murale.3 }}</td>
+            <td>{{ murale.4 }}</td>
+            <td>{{ murale.5 }}</td>
+            <td>{{ murale.6 }}</td>
+            <td>{{ murale.7 }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    {% endif %}
+    {% if limpieza %}
+    <table border="1">
+        <tr>
+            <th>Área Taller</th>
+            <th>Cantidad</th>
+            <th>Descripción</th>
+            <th>Observación</th>
+            <th>Fecha</th>
+            <th>Nombre</th>
+            <th>Solicitado por</th>
+        </tr>
+        {% for limpieza in limpiezas %}
+        <tr>
+            <td>{{ limpieza.1 }}</td>
+            <td>{{ limpieza.2 }}</td>
+            <td>{{ limpieza.3 }}</td>
+            <td>{{ limpieza.4 }}</td>
+            <td>{{ limpieza.5 }}</td>
+            <td>{{ limpieza.6 }}</td>
+            <td>{{ limpieza.7 }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    {% endif %}
+    {% if reparacione %}
+    <table border="1">
+        <tr>
+            <th>Área Taller</th>
+            <th>Cantidad</th>
+            <th>Descripción</th>
+            <th>Observación</th>
+            <th>Fecha</th>
+            <th>Nombre</th>
+            <th>Solicitado por</th>
+        </tr>
+        {% for reparacione in reparaciones %}
+        <tr>
+            <td>{{ reparacione.1 }}</td>
+            <td>{{ reparacione.2 }}</td>
+            <td>{{ reparacione.3 }}</td>
+            <td>{{ reparacione.4 }}</td>
+            <td>{{ reparacione.5 }}</td>
+            <td>{{ reparacione.6 }}</td>
+            <td>{{ reparacione.7 }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+</body>
+</html>

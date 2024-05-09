@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/jfif" href="{{ url_for('static', filename='img/Logo.jfif') }}">
+    <meta charset="UTF-8">
+    <title>Teacher Planner/Gestion/Inicio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--CSS-->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/gestion.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/footer.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bienvenida_gestion.css') }}">
+    <!-- Bootstrap CSS -->
+
+    <!--Bibliotecas-->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+
+    <!--JS-->
+    <script src="{{ url_for('static', filename='javascript/footer.js') }}"></script>
+</head>
+<body>
+    <div class="menu-container">
+        <div class="menu">
+            <div class="logo"><img src="{{ url_for('static', filename='img/Logo.jfif') }}" width="50px" alt="Logo de tu empresa" class="logo"></div>
+            <a class="active" href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('materiales_gestion') }}">Materiales (Gestión)</a>
+        </div>
+        {% if current_user.is_authenticated %}
+            <div class="user-info">
+                <a href="{{ url_for('perfil') }}">Perfil</a>
+            </div>
+
+        {% endif %}
+    </div>
+
+    <div class="container1">
+        <img src="{{ url_for('static', filename='img/Logo.jfif') }}" alt="Logo de tu empresa" class="logo1">
+        <div class="title1"><b>¡Bienvenido {{ user_logged_in }} a la Planificación de Docentes!</b></div>
+        <div class="subtitle1"><b>Eres del equipo de Gestion, puedes ver los materiales que los docentes envian</b></div>
+        <p class="p1"><b>Disfrute de la pagina y su cargo. :b</b></p>
+    </div>
+
+</body>
+</html>

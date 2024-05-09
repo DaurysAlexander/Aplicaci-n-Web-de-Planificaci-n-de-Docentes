@@ -1,0 +1,81 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #100058;
+    color: black;
+}
+
+.menu-container {
+    background-color: #343a40;
+    color: white;
+    overflow: hidden;
+    border-bottom: 2px solid #0056b3;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.menu {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.menu a {
+    color: white;
+    text-decoration: none;
+    margin-right: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 10px;
+    transition: background-color 0.3s;
+}
+
+.menu a:hover {
+    background-color: #0056b3;
+}
+
+.menu a.active {
+    background-color: #0056b3;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+}
+
+.user-info a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 10px;
+    transition: background-color 0.3s;
+}
+
+.user-info a:hover {
+    background-color: #0056b3;
+}
+
+table {
+    background-color: rgb(255, 255, 255);
+    border-collapse: collapse;
+    width: 100%;
+    margin: 20px; /* Añade márgenes alrededor de la tabla */
+}
+
+th, td {
+    border: 1px solid #000000;
+    text-align: left;
+    padding: 12px; /* Ajusta el espaciado interior de las celdas */
+    font-size: 14px; /* Ajusta el tamaño de la fuente */
+}
+
+th {
+    background-color: rgb(255, 255, 255);
+    font-weight: bold;
+    text-transform: uppercase;
+}

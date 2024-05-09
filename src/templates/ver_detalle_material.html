@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/jfif" href="{{ url_for('static', filename='img/Logo.jfif') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/ver_planificacion_academica.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle del Material</title>
+</head>
+<body>
+    <h1>Detalle del Material</h1>
+    <p><strong>Descripción:</strong> {{ material[2] }}</p>
+    <p><strong>Cantidad:</strong> {{ material[3] }}</p>
+    <p><strong>En Existencia:</strong> {{ material[4] }}</p>
+    <p><strong>Comprar:</strong> {{ material[5] }}</p>
+
+    <a href="{{ url_for('descargar_pdf1', material_id=material[0]) }}">Descargar PDF</a>
+</body>
+</html>

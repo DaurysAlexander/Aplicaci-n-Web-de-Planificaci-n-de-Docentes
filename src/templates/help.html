@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/jfif" href="{{ url_for('static', filename='img/Logo.jfif') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayuda/Teacher Planner</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/help.css') }}">
+    <script src="{{ url_for('static', filename='javascript/help.js') }}"></script>
+</head>
+<body>
+
+    
+    <center><div class="container">
+        <div class="back-button">
+            <a href="{{ url_for('index') }}" onclick="history.back()"><b>Regresar</b></a>
+        </div>
+        <br>
+        <h1>¡Bienvenido a la Ayuda!</h1>
+        <p>¿Necesitas asistencia? Aquí estamos para ayudarte.</p>
+        
+        <h2>¿Cómo utilizar la Planificación de Docentes?</h2>
+        <img src="{{ url_for('static', filename='img/imagen1.png') }}" width="500px" alt="">
+        <ol>
+            <li>Inicia sesión con tu cuenta de usuario.</li>
+            <li>Accede a la sección de planificaciones desde el menú principal.</li>
+            <li>Selecciona el tipo de planificación que deseas crear: Taller o Académica.</li>
+            <li>Rellena los datos requeridos en el formulario de planificación.</li>
+            <li>Guarda la planificación para que quede registrada en el sistema.</li>
+        </ol>
+        <img src="{{ url_for('static', filename='img/imagen2.png') }}" width="500px" alt="">
+        <img src="{{ url_for('static', filename='img/imagen3.png') }}" width="500px" alt="">
+        
+        <h2>¿Cómo solicitar materiales?</h2>
+        <img src="{{ url_for('static', filename='img/imagen4.png') }}" width="500px" alt="">
+        <img src="{{ url_for('static', filename='img/imagen5.png') }}" width="500px" alt="">
+        <img src="{{ url_for('static', filename='img/imagen6.png') }}" width="500px" alt="">
+        <ol>
+            <li>Accede a la sección de materiales desde el menú principal.</li>
+            <li>Haz clic en "Solicitud de Requerimientos".</li>
+            <li>Rellena el formulario con los materiales que necesitas.</li>
+            <li>Envía la solicitud para que sea procesada por el departamento correspondiente.</li>
+        </ol>
+        <br>
+        <br>
+        
+        <h2>¿Cómo utilizar el calendario?</h2>
+        <img src="{{ url_for('static', filename='img/imagen7.png') }}" width="500px" alt="">
+        <ol>
+            <li>Accede a la sección de calendario desde el menú principal.</li>
+            <li>Añade nuevos eventos haciendo clic en el botón correspondiente.</li>
+            <li>Consulta tus eventos próximos y organiza tu agenda de trabajo.</li>
+        </ol>
+        <br>
+        <br>
+
+        <h2>¿Cómo utilizar el Perfil?</h2>
+        <img src="{{ url_for('static', filename='img/imagen8.png') }}" width="500px" alt="">
+        <ol>
+            <li>Accede a la sección de Perfil desde el menú principal.</li>
+            <li>Añade nuevas informacion personal haciendo clic en el botón correspondiente.</li>
+            <li>Puedes tu usuario y las normas a cumplir, incluso cerrar sesion.</li>
+        </ol>
+    </div></center>
+</body>
+</html>

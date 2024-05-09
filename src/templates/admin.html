@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/jfif" href="'../img/Logo.jfif'">
+    <meta charset="UTF-8">
+    <title>Teacher Planner/Admin/Inicio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--CSS-->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/admin.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/footer.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bienvenida_admin.css') }}">
+    <!-- Bootstrap CSS -->
+
+    <!--Bibliotecas-->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+
+    <!--JS-->
+    <script src="{{ url_for('static', filename='javascript/footer.js') }}"></script>
+</head>
+<body>
+    <div class="menu">
+        <div class="logo"><img src="{{ url_for('static', filename='img/Logo.jfif') }}" width="50px" alt="Logo de tu empresa" class="logo"></div>
+        <a class="active" href="{{ url_for('index') }}">Home</a>
+        <div class="dropdown">
+            <button class="dropbtn">Agregar <i class="fa fa-caret-down"></i></button>
+            <div class="dropdown-content">
+                <a href="{{ url_for('agregar_usuario') }}">Agregar Administrador</a>
+                <a href="{{ url_for('agregardocentes') }}">Agregar Docentes</a>
+                <a href="{{ url_for('agregargestion') }}">Agregar Gestión</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">Planificaciones <i class="fa fa-caret-down"></i></button>
+            <div class="dropdown-content">
+                <a href="{{ url_for('planificacion_admin') }}">Planificacion Taller</a>
+                <a href="{{ url_for('planificacion_academica_admin') }}">Planificacion Academica</a>
+            </div>
+        </div>
+        <a href="{{ url_for('materiales_admin') }}">Materiales</a>
+        <a href="{{ url_for('calendar_admin') }}">Calendar</a>
+        {% if current_user.is_authenticated %}
+            <div class="user-info">
+                <a href="{{ url_for('perfil') }}">Perfil</a>
+            </div>
+        {% endif %}
+    </div>
+    
+
+    <div class="container1">
+        <img src="{{ url_for('static', filename='img/Logo.jfif') }}" alt="Logo de tu empresa" class="logo1">
+        <div class="title1"><b>¡Bienvenido {{ user_logged_in }} a la Planificación de Docentes!</b></div>
+        <div class="subtitle1"><b>Ya sabes qué hacer, sigue administrando</b></div>
+        <p class="p1"><b>:b</b></p>
+    </div>
+
+</body>
+</html>

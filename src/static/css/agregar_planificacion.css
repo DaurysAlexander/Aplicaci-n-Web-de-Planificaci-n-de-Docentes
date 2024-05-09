@@ -1,0 +1,104 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    padding-top: 50px;
+    margin: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #007bff;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+input[type="text"],
+input[type="number"],
+button {
+    padding: 8px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background-color: #f2f2f2;
+}
+
+.btn-group {
+    margin-bottom: 20px;
+    text-align: right;
+}
+
+.btn-group a {
+    margin-left: 10px;
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.btn-group a:hover {
+    color: #0056b3;
+}
+
+/* Estilos para pantallas pequeñas */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    button {
+        padding: 6px;
+        margin-right: 5px;
+        margin-bottom: 5px;
+    }
+
+    .menu a {
+        margin-right: 15px;
+        padding: 8px;
+    }
+
+    .user-info a {
+        margin-left: 15px;
+        padding: 8px;
+    }
+}

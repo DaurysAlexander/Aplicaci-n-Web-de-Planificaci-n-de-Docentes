@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/jfif" href="{{ url_for('static', filename='img/Logo.jfif') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Material/Teacher Planner</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/agregar_planificacion.css') }}">
+</head>
+<body>
+    <div class="menu-container">
+        <div class="menu">
+            <div class="logo"><img src="{{ url_for('static', filename='img/Logo.jfif') }}" width="50px" alt="Logo de tu empresa" class="logo"></div>
+            <a class="active" href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('planificacion') }}">planificacion</a>
+            <a href="{{ url_for('materiales') }}">materiales</a>
+            <a href="{{ url_for('calificaciones') }}">Ratings</a>
+            <a href="{{ url_for('calendar') }}">Calendar</a>
+        </div>
+        {% if current_user.is_authenticated %}
+            <div class="user-info">
+                <a href="{{ url_for('perfil') }}">Perfil</a>
+                
+            </div>
+        {% endif %}
+    </div>
+
+
+<div class="container">
+    <h1>CRUD de planificacion</h1>
+    <form action="/add_contact3" method="POST">
+        <input type="text" name="institucion" placeholder="institucion">
+        <input type="text" name="taller" placeholder="taller">
+        <input type="text" name="ra" placeholder="ra">
+        <input type="text" name="elementos_capacidad" placeholder="elementos_capacidad">
+        <input type="number" name="nivel" placeholder="nivel">
+        <input type="number" name="fecha" placeholder="fecha">
+        <input type="text" name="estrategias" placeholder="estrategias">
+        <input type="text" name="actividades_evaluacion" placeholder="actividades_evaluacion">
+        <input type="text" name="contenidos_trabajados" placeholder="contenidos_trabajados">
+        <button type="submit" class="btn btn-primary">Agregar planificacion</button>
+    </form>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>institucion</th>
+            <th>taller</th>
+            <th>ra</th>
+            <th>elementos_capacidad</th>
+            <th>nivel</th>
+            <th>fecha</th>
+            <th>estrategias</th>
+            <th>actividades_evaluacion</th>
+            <th>contenidos_trabajados</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for planificacion in planificacion %}
+        <tr>
+            <td>{{ planificacion.1 }}</td>
+            <td>{{ planificacion.2 }}</td>
+            <td>{{ planificacion.3 }}</td>
+            <td>{{ planificacion.4 }}</td>
+            <td>{{ planificacion.5 }}</td>
+            <td>{{ planificacion.6 }}</td>
+            <td>{{ planificacion.7 }}</td>
+            <td>{{ planificacion.8 }}</td>
+            <td>{{ planificacion.9 }}</td>
+            <td>
+                <a href="/edit3/{{ planificacion.0 }}" class="btn btn-sm btn-primary">Editar</a>
+                <a href="/delete3/{{ planificacion.0 }}" class="btn btn-sm btn-danger">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

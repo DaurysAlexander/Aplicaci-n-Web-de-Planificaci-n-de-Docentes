@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" type="image/jfif" href="{{ url_for('static', filename='img/Logo.jfif') }}">
+    <title>Calendario/Teacher Planner</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/calendar.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.0/main.min.css" rel="stylesheet">
+    <!-- JS -->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.0/main.min.js"></script>
+    <script src="{{ url_for('static', filename='javascript/calendar.js') }}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.0/main.min.css" integrity="sha512-KfuWdr7QhX3n5qviRmVdfvp1ol5H3fQ6uyWQrw4vzuT/ut2Pjbb+QDTCXRTgQ3tubBq+4o9H+4bhPHwPfGmYbw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.0/main.min.js" integrity="sha512-Er+R/WJ7sC+o7QXzoq9Hb16sGMJyK30xLQI4UZ70/NO+qUkBynmI6SfT7DoVeNZ7s2+Wps+7iPQQESsVE1wdEw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Función para agregar un evento al calendario y almacenarlo localmente
+    function addEventToCalendar(eventName, startDate, endDate) {
+        calendar.addEvent({
+            title: eventName,
+            start: startDate,
+            end: endDate
+        });
+
+        // Agregar el evento a la lista local de eventos
+        var events = JSON.parse(localStorage.getItem('events')) || [];
+        events.push({
+            title: eventName,
+            start: startDate,
+            end: endDate
+        });
+        localStorage.setItem('events', JSON.stringify(events));
+
+        // Envía el evento al servidor
+        fetch('/add_event', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                title: eventName,
+                start_date: startDate,
+                end_date: endDate
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data.message); // Muestra el mensaje de éxito en la consola
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+
+    // Función para eliminar un evento del calendario, de la lista local de eventos y de la base de datos
+    function deleteEventFromCalendar(eventId) {
+        // Elimina el evento del calendario
+        var event = calendar.getEventById(eventId);
+        if (event) {
+            event.remove();
+        }
+
+        // Eliminar el evento de la lista local de eventos
+        var events = JSON.parse(localStorage.getItem('events')) || [];
+        events = events.filter(event => event.id !== eventId);
+        localStorage.setItem('events', JSON.stringify(events));
+
+        // Envía la solicitud de eliminación al servidor
+        fetch('/delete_event', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id: eventId
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data.message); // Muestra el mensaje de éxito en la consola
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+
+        // Eliminar el evento de la base de datos
+        fetch('/delete_event_from_db', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id: eventId
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data.message); // Muestra el mensaje de éxito en la consola
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+
+    // Función para limpiar todos los eventos almacenados localmente
+    function clearLocalStorage() {
+        localStorage.removeItem('events');
+        alert('Todos los eventos se han borrado localmente.');
+    }
+
+    // Configuración inicial del calendario
+    var calendarEl = document.getElementById('calendar');
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        selectable: true,
+        select: function(info) {
+            var startDate = info.startStr;
+            var endDate = info.endStr;
+            var eventName = prompt('Nombre del Evento:');
+            if (eventName) {
+                addEventToCalendar(eventName, startDate, endDate);
+            }
+        },
+        events: function(fetchInfo, successCallback, failureCallback) {
+            var events = JSON.parse(localStorage.getItem('events')) || [];
+            successCallback(events);
+        },
+        eventClick: function(info) {
+            var deleteEvent = confirm('¿Estás seguro de que quieres eliminar este evento?');
+            if (deleteEvent) {
+                deleteEventFromCalendar(info.event.id);
+            }
+        }
+    });
+    calendar.render();
+
+    // Agregar un botón para borrar eventos locales
+    var clearButton = document.createElement('button');
+    clearButton.textContent = 'Borrar Eventos Locales';
+    clearButton.addEventListener('click', clearLocalStorage);
+    document.body.appendChild(clearButton);
+});
+
+// Configuración inicial del calendario
+var calendarEl = document.getElementById('calendar');
+var calendar = new FullCalendar.Calendar(calendarEl, {
+    initialView: 'dayGridMonth',
+    selectable: true,
+    select: function(info) {
+        var startDate = info.startStr;
+        var endDate = info.endStr;
+        var eventName = prompt('Nombre del Evento:');
+        if (eventName) {
+            addEventToCalendar(eventName, startDate, endDate);
+        }
+    },
+    events: function(fetchInfo, successCallback, failureCallback) {
+        fetch('/get_events', {
+            method: 'GET'
+        })
+        .then(response => response.json())
+        .then(data => {
+            successCallback(data.events);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            failureCallback(error);
+        });
+    },
+    eventClick: function(info) {
+        var deleteEvent = confirm('¿Estás seguro de que quieres eliminar este evento?');
+        if (deleteEvent) {
+            deleteEventFromCalendar(info.event.id);
+        }
+    }
+});
+calendar.render();
+
+
+</script>
+</head>
+<body>
+    <div class="menu">
+        <div class="logo"><img src="{{ url_for('static', filename='img/Logo.jfif') }}" width="50px" alt="Logo de tu empresa" class="logo"></div>
+        <a class="active" href="{{ url_for('index') }}">Home</a>
+        <div class="dropdown">
+            <button class="dropbtn">Planificaciones <i class="fa fa-caret-down"></i></button>
+            <div class="dropdown-content">
+                <a href="{{ url_for('planificacion') }}">Planificacion Taller</a>
+                <a href="{{ url_for('planificacion_academica') }}">Planificacion Academica</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">Materiales <i class="fa fa-caret-down"></i></button>
+            <div class="dropdown-content">
+                <a href="{{ url_for('materiales') }}">Materiales</a>
+                <a href="">Solicitud de Requerimientos</a>
+            </div>
+        </div>
+        <a href="{{ url_for('calendar') }}">Calendar</a>
+        {% if current_user.is_authenticated %}
+            <div class="user-info">
+                <a href="{{ url_for('perfil') }}">Perfil</a>
+            </div>
+        {% endif %}
+    </div>
+
+    <h1>Calendario de Eventos</h1>
+    <div id='calendar'></div>
+</body>
+</html>
+

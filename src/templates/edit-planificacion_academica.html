@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/jfif" href="{{ url_for('static', filename='img/Logo.jfif') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Material/Teacher Planner</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/edit_planificacion.css') }}">
+</head>
+<body>
+
+    <div class="container">
+        <h1>CRUD de Planificacion Academica</h1>
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <div>
+                {{ form.instituto.label }}
+                {{ form.instituto }}
+            </div>
+            <div>
+                {{ form.asignatura.label }}
+                {{ form.asignatura }}
+            </div>
+            <div>
+                {{ form.grado.label }}
+                {{ form.grado }}
+            </div>
+            <div>
+                {{ form.docente.label }}
+                {{ form.docente }}
+            </div>
+            <div>
+                {{ form.tiempo_asignado.label }}
+                {{ form.tiempo_asignado }}
+            </div>
+            <div>
+                {{ form.tema.label }}
+                {{ form.tema }}
+            </div>
+            <div>
+                {{ form.competencias_fundamentales.label }}
+                {{ form.competencias_fundamentales }}
+            </div>
+            <div>
+                {{ form.nivel_de_dominio.label }}
+                {{ form.nivel_de_dominio }}
+            </div>
+            <div>
+                {{ form.competencias_especificas.label }}
+                {{ form.competencias_especificas }}
+            </div>
+            <div>
+                {{ form.situacion_de_aprendizaje.label }}
+                {{ form.situacion_de_aprendizaje }}
+            </div>
+            <div>
+                {{ form.secuencias_didacticas.label }}
+                {{ form.secuencias_didacticas }}
+            </div>
+            <div>
+                {{ form.momento.label }}
+                {{ form.momento }}
+            </div>
+            <div>
+                {{ form.tiempo.label }}
+                {{ form.tiempo }}
+            </div>
+            <div>
+                {{ form.actividades_de_aprendizaje.label }}
+                {{ form.actividades_de_aprendizaje }}
+            </div>
+            <div>
+                {{ form.indicadores_de_logro.label }}
+                {{ form.indicadores_de_logro }}
+            </div>
+            <div>
+                {{ form.metacognicion.label }}
+                {{ form.metacognicion }}
+            </div>
+            <div>
+                {{ form.evidencias.label }}
+                {{ form.evidencias }}
+            </div>
+            <div>
+                {{ form.tecnicas_e_instrumentos.label }}
+                {{ form.tecnicas_e_instrumentos }}
+            </div>
+            <div>
+                {{ form.recursos.label }}
+                {{ form.recursos }}
+            </div>
+            <button type="submit">Guardar Cambios</button>
+            <div class="back-button">
+                <a href="#" onclick="history.back()">Cancelar</a>
+            </div>
+        </form>
+    </div>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="container">
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}" role="alert">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+
+</body>
+</html>

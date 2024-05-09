@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/jfif" href="{{ url_for('static', filename='img/Logo.jfif') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Material/Teacher Planner</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/edit_contact.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h1>Editar</h1>
+    <form action="/add_contact" method="POST">
+        <input type="text" name="username" placeholder="Username">
+        <input type="text" name="email" placeholder="Email">
+        <input type="text" name="password" placeholder="Password">
+        <input type="number" name="role" placeholder="Role">
+        <button type="submit" class="btn btn-primary">Agregar Docente</button>
+        <div class="back-button">
+            <a href="#" onclick="history.back()">Cancelar</a>
+        </div>
+    </form>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Username</th>
+            <th>Password</th>
+            <th>Role</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for contact in contacts %}
+        <tr>
+            <td>{{ contact.1 }}</td>
+            <td>{{ contact.2 }}</td>
+            <td>{{ contact.3 }}</td>
+            <td>
+                <a href="/edit/{{ contact.0 }}" class="btn btn-sm btn-primary">Editar</a>
+                <a href="/delete/{{ contact.0 }}" class="btn btn-sm btn-danger">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+<div class="container">
+    {% for category, message in messages %}
+    <div class="alert alert-{{ category }}" role="alert">
+        {{ message }}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endwith %}
+
+</body>
+</html>

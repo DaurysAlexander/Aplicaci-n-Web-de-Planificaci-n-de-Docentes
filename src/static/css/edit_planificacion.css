@@ -1,0 +1,170 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    padding-top: 50px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+input[type="text"],
+input[type="number"],
+button {
+    padding: 8px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background-color: #f2f2f2;
+}
+
+.btn-group {
+    margin-bottom: 20px;
+    text-align: right;
+}
+
+.btn-group a {
+    margin-left: 10px;
+}
+
+.menu-container {
+    background-color: #343a40;
+    color: white;
+    overflow: hidden;
+    border-bottom: 2px solid #0056b3;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.menu {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.menu a {
+    color: white;
+    text-decoration: none;
+    margin-right: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 10px;
+    transition: background-color 0.3s;
+}
+
+.menu a:hover {
+    background-color: #0056b3;
+}
+
+.menu a.active {
+    background-color: #0056b3;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+}
+
+.user-info a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 10px;
+    transition: background-color 0.3s;
+}
+
+.user-info a:hover {
+    background-color: #0056b3;
+}
+
+/* Media query para dispositivos móviles */
+@media only screen and (max-width: 600px) {
+    .container {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    /* Ajustar el tamaño de los botones en dispositivos móviles */
+    button {
+        padding: 5px 10px;
+    }
+
+    /* Ajustar el tamaño de la fuente en los enlaces del menú */
+    .menu a {
+        font-size: 0.8rem;
+        margin-right: 10px;
+    }
+
+    /* Ajustar el tamaño de la fuente en los enlaces de usuario */
+    .user-info a {
+        font-size: 0.8rem;
+        margin-left: 10px;
+    }
+}
+
+/* Media query para dispositivos más pequeños */
+@media only screen and (max-width: 400px) {
+    /* Ajustar el tamaño de los botones en dispositivos muy pequeños */
+    button {
+        padding: 5px 8px;
+    }
+
+    /* Ajustar el tamaño de la fuente en los enlaces del menú en dispositivos muy pequeños */
+    .menu a {
+        font-size: 0.7rem;
+        margin-right: 5px;
+    }
+
+    /* Ajustar el tamaño de la fuente en los enlaces de usuario en dispositivos muy pequeños */
+    .user-info a {
+        font-size: 0.7rem;
+        margin-left: 5px;
+    }
+}

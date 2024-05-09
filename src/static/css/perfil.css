@@ -1,0 +1,165 @@
+/* Estilos generales */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilos para el perfil */
+.profile-header {
+    padding: 20px;
+    text-align: center;
+}
+
+.profile-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto 20px;
+}
+
+.profile-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-name {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.profile-bio {
+    color: #777;
+    margin-bottom: 20px;
+}
+
+.profile-section {
+    padding: 20px;
+    margin: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    
+}
+
+.profile-section-title {
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    width:  100%;
+    text-align: center;
+}
+
+.profile-section-content {
+    
+    color: #555;
+    margin-bottom: 20px;
+    padding: 20px;
+    width:  95%;
+}
+
+input{
+    font-weight: bold;
+    margin-bottom: 20px;
+    font-size: 15px;
+    width:  100%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+/* Estilos para los enlaces sociales */
+.social-links {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.social-links a {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 20px;
+    color: #fff;
+    margin-right: 10px;
+    border-radius: 50%;
+    background-color: #333;
+    text-decoration: none;
+}
+
+/* Ajustar el color para cada icono de red social */
+.social-links a.facebook {
+    background-color: #3b5998;
+}
+
+.social-links a.youtube {
+    background-color: #cd201f;
+}
+
+.social-links a.instagram {
+    background-color: #e4405f;
+}
+
+/* Estilos para los botones */
+.back-button,
+.logout-button {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.back-button a,
+.logout-button a {
+    color: #333;
+    text-decoration: none;
+    padding: 5px 10px;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+/* Reglas de medios para hacer responsive */
+@media (max-width: 768px) {
+    .profile-avatar {
+        width: 100px;
+        height: 100px;
+    }
+
+    .profile-name {
+        font-size: 20px;
+    }
+
+    .profile-section {
+        margin: 10px;
+        padding: 10px;
+    }
+
+    .social-links a {
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 576px) {
+    .profile-avatar {
+        width: 80px;
+        height: 80px;
+    }
+
+    .profile-name {
+        font-size: 18px;
+    }
+
+    .profile-section {
+        margin: 5px;
+        padding: 5px;
+    }
+
+    .social-links a {
+        width: 25px;
+        height: 25px;
+        line-height: 25px;
+        font-size: 14px;
+        margin-right: 5px;
+    }
+}

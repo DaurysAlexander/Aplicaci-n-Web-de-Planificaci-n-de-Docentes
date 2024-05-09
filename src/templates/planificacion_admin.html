@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/jfif" href="{{ url_for('static', filename='img/Logo.jfif') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- Bootstrap CSS -->
+
+        <!--Bibliotecas-->
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/planificacion_admin.css') }}">
+
+        <script src="{{ url_for('static', filename='javascript/planificacion.js') }}"></script>
+    <title>Planificacion/Teacher Planner</title>
+</head>
+<body>
+    <div class="menu">
+        <div class="logo"><img src="{{ url_for('static', filename='img/Logo.jfif') }}" width="50px" alt="Logo de tu empresa" class="logo"></div>
+        <a class="active" href="{{ url_for('index') }}">Home</a>
+        <div class="dropdown">
+            <button class="dropbtn">Agregar <i class="fa fa-caret-down"></i></button>
+            <div class="dropdown-content">
+                <a href="{{ url_for('agregar_usuario') }}">Agregar Administrador</a>
+                <a href="{{ url_for('agregardocentes') }}">Agregar Docentes</a>
+                <a href="{{ url_for('agregargestion') }}">Agregar Gestión</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">Planificaciones <i class="fa fa-caret-down"></i></button>
+            <div class="dropdown-content">
+                <a href="{{ url_for('planificacion_admin') }}">Planificacion Taller</a>
+                <a href="{{ url_for('planificacion_academica_admin') }}">Planificacion Academica</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">Materiales <i class="fa fa-caret-down"></i></button>
+            <div class="dropdown-content">
+                <a href="{{ url_for('materiales_admin') }}">Materiales</a>
+                <a href="">Solicitud de Requerimientos</a>
+            </div>
+        </div>
+        <a href="{{ url_for('calendar_admin') }}">Calendar</a>
+        {% if current_user.is_authenticated %}
+            <div class="user-info">
+                <a href="{{ url_for('perfil') }}">Perfil</a>
+            </div>
+        {% endif %}
+    </div>
+
+
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        <center>
+            <h3>Institucion: {{ form.institucion(size=30) }}   Taller de: {{ form.area_taller(size=30) }}    Docente: {{ form.docente(size=auto) }}   <br> <br>Código: {{ form.codigo(size=auto) }}    UC: {{ form.UC(size=auto) }}    Fecha de Inicio: {{ form.fecha_inicio(size=auto) }} 
+                Fecha de Termino: {{ form.fecha_termino(size=auto) }}</h3>
+        </center>
+        <h4>Resultado de Aprendizaje</h4>
+        <table border="1">
+            <tr>
+                <th>Resultado de Aprendizaje</th>
+                <th>Elementos de Capacidad</th>
+                <th>Nivel</th>
+                <th>Fecha</th>
+                <th>Estrategias de Enseñanza-Aprendizaje</th>
+                <th>Actividades de Evaluación e instrumentos de Evaluación</th>
+                <th>Contenidos Trabajados</th>
+            </tr>
+            <tr>
+                <td>{{ form.ra(size=auto) }}</td>
+                <td>{{ form.elementos_capacidad(size=auto) }}</td>
+                <td>{{ form.nivel(size=auto) }}</td>
+                <td>{{ form.fecha(size=auto) }}</td>
+                <td>{{ form.estrategias(size=auto) }}</td>
+                <td>{{ form.actividades_evaluacion(size=auto) }}</td>
+                <td>{{ form.contenidos_trabajados(size=auto) }}</td>
+            </tr>
+        </table>
+        {{ form.submit() }}
+    </form>
+<hr>
+{% for planificacion in planificacion %}
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ra</th>
+            <th>elementos_capacidad</th>
+            <th>nivel</th>
+            <th>fecha</th>
+            <th>estrategias</th>
+            <th>actividades_evaluacion</th>
+            <th>contenidos_trabajados</th>
+            <th>Actiones</th>
+        </tr>
+        </thead>
+<hr>
+        <tbody>
+        <tr>
+            <td>{{ planificacion.3 }}</td>
+            <td>{{ planificacion.4 }}</td>
+            <td>{{ planificacion.5 }}</td>
+            <td>{{ planificacion.6 }}</td>
+            <td>{{ planificacion.7 }}</td>
+            <td>{{ planificacion.8 }}</td>
+            <td>{{ planificacion.9 }}</td>
+
+            <td>
+                <a href="/edit3/{{ planificacion.0 }}" class="btn btn-sm btn-primary">Editar</a><br><br>
+                <a href="/delete3/{{ planificacion.0 }}" class="btn btn-sm btn-danger">Eliminar</a><br><br>
+                <a href="/ver_planificacion/{{ planificacion.0 }}" class="btn btn-sm btn-danger">Ver Planificacion</a>
+            </td>      
+        </tr>
+        </tbody>
+    </table>
+{% endfor %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+<script>
+        function handleEnter(event, currentElement) {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            const form = currentElement.form;
+            const index = Array.prototype.indexOf.call(form, currentElement);
+            form.elements[index + 1].focus();
+            return false;
+        }
+        return true;
+    }
+
+</script>
+</body>
+</html>
+

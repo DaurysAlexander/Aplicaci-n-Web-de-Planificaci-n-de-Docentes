@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" type="image/jfif" href="{{ url_for('static', filename='img/Logo.jfif') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/perfil.css') }}">
+    <link rel="icon" type="image/jfif" href="{{ url_for('static', filename='img/Logo.jfif') }}">
+    <title>Perfil/Teacher Planner</title>
+
+</head>
+<body class="light-mode">
+    <div class="profile-header">
+        <center><h2>Nombre de Usuario:</h2></center>
+        <div class="profile-name">{{ user_logged_in }}</div>
+    </div>
+
+    <form method="POST">
+        <div class="profile-section">
+            <div class="profile-section-title">Información personal</div>
+            <div class="profile-section-content">
+                <label for="nombre_apellido"><b>Nombre y Apellido:</b></label>
+                {% if user_data[0] == "" %}
+                    <input type="text" id="nombre_apellido" name="nombre_apellido" required>
+                {% else %}
+                    <div class="profile-name">{{ user_data[0] }}</div>
+                {% endif %}
+<br> <br>
+                <label for="edad"><b>Edad:</b></label>
+                {% if user_data[1] == 0 %}
+                    <input type="number" id="edad" name="edad" required>
+                {% else %}
+                    <div class="profile-name">{{ user_data[1] }}</div>
+                {% endif %}
+<br> <br>
+                <label for="pais"><b>País:</b></label>
+                {% if user_data[2] == "" %}
+                    <input type="text" id="pais" name="pais" required>
+                {% else %}
+                    <div class="profile-name">{{ user_data[2] }}</div>
+                {% endif %}
+<br> <br>
+                <label for="telefono"><b>Telefono:</b></label>
+                {% if user_data[3] == 0 %}
+                    <input type="number" id="telefono" name="telefono" required>
+                {% else %}
+                    <div class="profile-name">{{ user_data[3] }}</div>
+                {% endif %}
+<br> <br>       
+                <label for="materia"><b>Materia:</b></label>
+                {% if user_data[4] == "" %}
+                    <input type="text" id="materia" name="materia" required>
+                {% else %}
+                    <div class="profile-name">{{ user_data[4] }}</div>
+                {% endif %}
+            </div>
+        </div>
+        <button type="submit"><b>Guardar</b></button>
+    </form>
+
+    <div class="profile-actions">
+        <a href="{{ url_for('editar_perfil') }}"><b>Editar</b></a>
+        <a href="{{ url_for('eliminar_perfil') }}"><b>Eliminar</b></a>
+    </div>
+
+        <div class="profile-section">
+            <div class="profile-section-title">Normas del Perfil</div>
+            <div class="profile-section-content">
+            <p><b>Bienvenido/a a nuestra plataforma. Para mantener un ambiente seguro y respetuoso para todos los usuarios, es importante que sigas estas normas al completar tu perfil:</b> <br> <br>
+
+                <b>1. Información personal:</b> Proporciona información veraz y actualizada en tu perfil, incluyendo tu nombre completo, edad y ubicación. <br> <br>
+                
+                <b>2. Comportamiento:</b> Sé respetuoso/a con todos los usuarios. Evita el uso de lenguaje ofensivo, discriminatorio o inapropiado. <br> <br>
+                
+                <b>3. Contenido apropiado:</b> No publiques contenido que pueda considerarse difamatorio, obsceno, amenazante o que infrinja los derechos de terceros. <br><br>
+                
+                <b>4. Privacidad:</b> Respetamos tu privacidad. No compartas información sensible o personal en tu perfil, como contraseñas o datos financieros. <br> <br>
+                
+                <b>5. Seguridad:</b> Protege tu cuenta y contraseña. No compartas tu información de inicio de sesión con otras personas. <br> <br>
+                
+                <b>6. Verificación de la información:</b> Podemos verificar la autenticidad de la información proporcionada en tu perfil. Proporciona información precisa y actualizada. <br> <br>
+                
+                <b>7. Actualización del perfil:</b> Mantén tu perfil actualizado y reflejando tu situación actual. <br> <br>
+                
+                <b>8. Cumplimiento de las normas:</b> El incumplimiento de estas normas puede resultar en la eliminación de tu perfil o la suspensión de tu cuenta. <br> <br>
+                
+                <b>Al completar tu perfil, aceptas cumplir con estas normas. Gracias por contribuir a crear un ambiente positivo en nuestra comunidad.</b></p>
+            </div>
+        </div>
+
+    <!-- Botón de regresar -->
+    <div class="back-button">
+        <a href="#" onclick="history.back()"><b>Regresar</b></a>
+    </div>
+
+    <!-- Botón de cerrar sesión -->
+    <div class="logout-button">
+        <a href="/logout"><b>Cerrar sesión</b></a>
+    </div>
+</body>
+</html>

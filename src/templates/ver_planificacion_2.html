@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/jfif" href="{{ url_for('static', filename='img/Logo.jfif') }}">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ver Planificación</title>
+</head>
+<body>
+   <center><img src="{{ url_for('static', filename='img/ministerio logo.png') }}" width="100px" alt="Logo de tu empresa" class="logo"> </center>
+   <center><h4>Dirección General de Educación Secundaria</h2></center>
+   <center><h4>Dirección de Educación Técnico Profesional</h3></center>
+    <center>{{ data[1] }}</center>
+    <center><h4>PLANIFICACION BAJO ENFOQUE POR COMPETENCIAS</h4></center>
+    <center><h5>MATRIZ DE PLANIFICACION POR RESULTADO DE APRENDIZAJE (RA), TALLER DE: {{ data[2] }}</h5></center>
+
+<h5>Bachillerato Técnico en {{ data[2] }},        Docente {{ data[10] }},       Modulo Formativo (MF){{ data[2] }},       Código {{ data[11] }},        Asociado a la Competencia Fundamental: _X Ética Ciudadana / _X Resolución de Problemas / _X Ambiental 
+    y de la salud / _X Comunicativa / _X Científica y Tecnológica / _X Desarrollo Personal y Espiritual / _X Pensamiento Lógico, Creativo y Crítico.      UC Asociada al MF: {{ data[12] }},       Código {{ data[11] }}, Fecha inicio: {{ data[13] }} fecha de término: {{ data[14] }}</h5>
+    <table border="1">
+        <tr>
+            <th>Resultado de Aprendizaje</th>
+            <th>Elementos de Capacidad</th>
+            <th>Nivel</th>
+            <th>Fecha</th>
+            <th>Estrategias Enseñanza-Aprendizaje</th>
+            <th>Actividades de Evaluación e instrumentos de Evaluación</th>
+            <th>Contenidos Trabajados</th>
+        </tr>
+        <tr>
+            <td>{{ data[3] }}</td>
+            <td>{{ data[4] }}</td>
+            <td>{{ data[5] }}</td>
+            <td>{{ data[6] }}</td>
+            <td>{{ data[7] }}</td>
+            <td>{{ data[8] }}</td>
+            <td>{{ data[9] }}</td>
+        </tr>
+    </table>
+</body>
+</html>
+
